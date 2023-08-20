@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "574254706709",
+    "project_id": "see-you-now-733dc",
+    "storage_bucket": "see-you-now-733dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574254706709:android:b532f76fad705b11fdde1c",
+        "android_client_info": {
+          "package_name": "com.example.see_you_now"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "574254706709-rnd8m21b2937304bmp29rprg9qnh3san.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.see_you_now",
+            "certificate_hash": "e9edfa2bf72ad44a4edb304cbc90b33bd7d63dec"
+          }
+        },
+        {
+          "client_id": "574254706709-2qdnpd2l4nvat7mqvdma3e50gfrnv51q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL0t09fxhHop33x2c2pcWLzjlW2rHGgU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "574254706709-2qdnpd2l4nvat7mqvdma3e50gfrnv51q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
