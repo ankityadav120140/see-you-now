@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:see_you_now/globals/global.dart';
+import 'package:see_you_now/pages/call_page.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 import '../services/add_call_log.dart';
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _getAppUsers();
     _getContacts();
+    _searchQuery = '';
   }
 
   Future<void> _getAppUsers() async {
@@ -63,12 +65,13 @@ class _HomePageState extends State<HomePage> {
 
     phoneContacts.forEach((contact) {
       for (var phone in contact.phones!) {
-        if (formattedAppUsers.contains(_getLast10Digits(phone.value!))) {
+        if (formattedAppUsers.contains(
+            _getLast10Digits(removeSpacesFromPhoneNumber(phone.value!)))) {
           String displayName = contact.displayName ?? "No Name";
           String phoneNumber = _getLast10Digits(phone.value!);
           Contact customContact = Contact(
             displayName: displayName,
-            phones: [Item(label: 'mobile', value: phoneNumber)],
+            phones: [Item(value: phoneNumber)],
           );
           appContacts.add(customContact);
           break;
@@ -78,8 +81,13 @@ class _HomePageState extends State<HomePage> {
 
     setState(() {
       _contacts = appContacts;
+      // _contacts = phoneContacts;
       loading = false;
     });
+  }
+
+  String removeSpacesFromPhoneNumber(String phoneNumber) {
+    return phoneNumber.replaceAll(' ', '');
   }
 
   String _getLast10Digits(String phoneNumber) {
@@ -241,12 +249,29 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _getAppUsers();
-          _getContacts();
-        },
-        child: Icon(Icons.replay_outlined),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CallPage(
+                          callID: "0",
+                          userID: prefs.getString("phone")!,
+                          UserName: prefs.getString("name")!)));
+            },
+            label: Text("Join Universal Call"),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              _getAppUsers();
+              _getContacts();
+            },
+            child: Icon(Icons.replay_outlined),
+          ),
+        ],
       ),
     );
   }
